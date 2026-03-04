@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 5 Design Mistakes — DesignBees</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Questrial&display=swap" rel="stylesheet">
+<style>
+:root {
+  --honey-gold: #F6BE38;
+  --propolis-brown: #A49362;
+  --beeswax-cream: #F3EFD6;
+  --midnight-drone: #282B30;
+  --forest-hive: #4D7B1B;
+  --action-green: #05C84B;
+  --wild-mint: #6CB9A6;
+  --lavender-bloom: #D2C4DE;
+  --nectar-tint: #D2DEC6;
+  --drone-grey: #BFBFBF;
+  --pure-black: #000000;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Questrial', sans-serif;
+  background: #EFECE3;
+  color: var(--pure-black);
+}
+
+/* NAV — pure black */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--pure-black);
+  padding: 0 40px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(246,190,56,0.12);
+}
+.nav-logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+  text-decoration: none;
+}
+.nav-logo .d  { color: var(--propolis-brown); }
+.nav-logo .b  { color: var(--honey-gold); }
+.nav-logo .dot { color: var(--honey-gold); }
+
+.nav-pills { display: flex; gap: 4px; align-items: center; }
+.nav-pill {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.4);
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-pill:hover, .nav-pill.active {
+  background: rgba(5,200,75,0.15);
+  color: var(--action-green);
+}
+/* Primary CTA nav button */
+.nav-cta {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  background: var(--forest-hive);
+  color: white;
+  padding: 7px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--action-green); }
+
+.reading-progress {
+  position: fixed;
+  top: 58px; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--honey-gold), var(--action-green));
+  z-index: 99;
+  transition: width 0.1s;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 80px rgba(0,0,0,0.1);
+  margin-top: 58px;
+}
+
+/* COVER — pure black */
+.cover {
+  background: var(--pure-black);
+  padding: 80px 64px 72px;
+  position: relative;
+  overflow: hidden;
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cover-bg1 { position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; border-radius: 50%; background: var(--honey-gold); opacity: 0.07; }
+.cover-bg2 { position: absolute; bottom: -60px; left: 40%; width: 220px; height: 220px; border-radius: 50%; background: var(--forest-hive); opacity: 0.1; }
+.cover-hex { position: absolute; top: 60px; right: 64px; opacity: 0.05; }
+.cover-inner { position: relative; z-index: 1; }
+.cover-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(246,190,56,0.1);
+  border: 1px solid rgba(246,190,56,0.25);
+  color: var(--honey-gold);
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 28px;
+}
+.cover-tag-dot { width: 6px; height: 6px; background: var(--honey-gold); border-radius: 50%; }
+.cover h1 {
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 42px; line-height: 1.1;
+  color: white; max-width: 580px; margin-bottom: 8px;
+}
+.cover h1 em { font-style: normal; color: var(--honey-gold); }
+.cover-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 16px; max-width: 480px; line-height: 1.6; margin-bottom: 40px; }
+.cover-meta { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.cover-byline { font-size: 12px; color: rgba(255,255,255,0.3); }
+.cover-byline strong { color: rgba(255,255,255,0.55); }
+
+/* Stats — action green for contrast against pure black header */
+.cover-stats { display: flex; gap: 40px; }
+.cover-stat { text-align: center; }
+.cover-stat-num {
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 44px;
+  color: var(--action-green);
+  line-height: 1;
+}
+.cover-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* INTRO */
+.intro {
+  padding: 60px 64px 52px;
+  background: var(--beeswax-cream);
+  border-bottom: 2px solid rgba(164,147,98,0.2);
+}
+.section-eyebrow { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--propolis-brown); margin-bottom: 12px; }
+.intro h2 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.3; color: var(--pure-black); max-width: 600px; margin-bottom: 18px; }
+.intro p { font-size: 15px; line-height: 1.75; color: var(--pure-black); max-width: 640px; margin-bottom: 14px; }
+.intro-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.intro-card { background: white; border-radius: 12px; padding: 20px; border-left: 3px solid var(--honey-gold); }
+.intro-card-icon { font-size: 22px; margin-bottom: 8px; }
+.intro-card-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px; color: var(--pure-black); margin-bottom: 4px; }
+.intro-card-text { font-size: 12px; color: var(--pure-black); line-height: 1.5; }
+
+/* MISTAKE SECTIONS */
+.mistake-section { border-bottom: 1px solid #f0ece2; overflow: hidden; }
+.mistake-header {
+  padding: 48px 64px 38px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+}
+.mistake-header:hover { background: #fafaf7; }
+.mistake-number-row { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.mistake-badge {
+  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  background: var(--pure-black); color: var(--honey-gold);
+  padding: 5px 14px; border-radius: 20px;
+}
+.expand-icon {
+  position: absolute; right: 64px; top: 48px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #f0ece2;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, background 0.2s;
+}
+.mistake-section.open .expand-icon { transform: rotate(180deg); background: var(--honey-gold); }
+.expand-icon svg { width: 14px; height: 14px; }
+.mistake-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.2; color: var(--pure-black); max-width: 560px; margin-bottom: 10px; }
+.mistake-title em { font-style: normal; color: var(--honey-gold); }
+.mistake-teaser { font-size: 14px; color: #666; line-height: 1.6; max-width: 520px; }
+
+/* Accent left borders per mistake */
+.mistake-section:nth-child(1) .mistake-header { border-left: 5px solid #E05252; }
+.mistake-section:nth-child(2) .mistake-header { border-left: 5px solid var(--lavender-bloom); }
+.mistake-section:nth-child(3) .mistake-header { border-left: 5px solid var(--wild-mint); }
+.mistake-section:nth-child(4) .mistake-header { border-left: 5px solid var(--honey-gold); }
+.mistake-section:nth-child(5) .mistake-header { border-left: 5px solid var(--propolis-brown); }
+
+.mistake-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+.mistake-section.open .mistake-body { max-height: 900px; }
+.mistake-body-inner { padding: 0 64px 48px; }
+
+.mistake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+.mistake-card { border-radius: 12px; padding: 24px; }
+.mistake-card.problem { background: #fff7f7; border: 1.5px solid #f5c6c6; }
+.mistake-card.impact  { background: #fffbee; border: 1.5px solid #f0d87a; }
+.mistake-card-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.mistake-card.problem .mistake-card-label { color: #c0392b; }
+.mistake-card.impact  .mistake-card-label { color: var(--propolis-brown); }
+/* Card body text: pure black */
+.mistake-card p { font-size: 13.5px; line-height: 1.65; color: var(--pure-black); }
+
+.mistake-fix { background: #f0fbf3; border: 1.5px solid var(--nectar-tint); border-left: 4px solid var(--action-green); border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; }
+.mistake-fix-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--forest-hive); margin-bottom: 6px; }
+.mistake-fix p { font-size: 13.5px; line-height: 1.6; color: var(--pure-black); }
+
+/* Secondary button for "See how we solve this" */
+.secondary-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--pure-black);
+  color: #fff;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px;
+  text-decoration: none;
+  padding: 9px 20px; border-radius: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.secondary-cta:hover { background: var(--midnight-drone); transform: translateY(-1px); }
+.secondary-cta svg { width: 13px; height: 13px; }
+
+/* AUDIT SECTION */
+.audit-section { padding: 52px 64px; background: var(--beeswax-cream); border-bottom: 1px solid #e0d8c0; }
+.audit-section h2 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 22px; color: var(--pure-black); margin-bottom: 8px; }
+.audit-section .sub { font-size: 14px; color: var(--pure-black); margin-bottom: 28px; line-height: 1.5; }
+.audit-grid { display: flex; flex-direction: column; gap: 10px; }
+.audit-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: white; border-radius: 10px; padding: 14px 18px;
+  cursor: pointer; border: 1.5px solid transparent;
+  transition: all 0.2s; user-select: none;
+}
+.audit-item:hover { border-color: var(--nectar-tint); }
+.audit-item.yes { border-color: var(--nectar-tint); background: #f0fbf3; }
+.audit-item.yes .audit-text { color: var(--drone-grey); text-decoration: line-through; }
+.audit-check {
+  width: 22px; height: 22px;
+  border: 2px solid var(--drone-grey); border-radius: 6px;
+  flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; background: white;
+}
+.audit-item.yes .audit-check { background: var(--action-green); border-color: var(--action-green); }
+.audit-check svg { opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); }
+.audit-item.yes .audit-check svg { opacity: 1; transform: scale(1); }
+.audit-text { font-size: 13.5px; line-height: 1.5; color: var(--pure-black); padding-top: 2px; }
+
+/* Audit tags — secondary palette, differentiated per mistake */
+.audit-tag {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px;
+  padding: 3px 10px; border-radius: 20px;
+  color: var(--pure-black); white-space: nowrap;
+}
+.audit-tag-1 { background: #F4B8A0; }
+.audit-tag-2 { background: var(--lavender-bloom); }
+.audit-tag-3 { background: var(--wild-mint); }
+.audit-tag-4 { background: var(--honey-gold); }
+.audit-tag-5 { background: var(--nectar-tint); }
+.audit-item.yes .audit-tag { opacity: 0.5; }
+
+.audit-result {
+  margin-top: 20px; padding: 18px 22px;
+  border-radius: 12px; background: white;
+  border: 2px solid var(--drone-grey);
+  font-size: 14px; line-height: 1.6; transition: border-color 0.3s; display: none;
+}
+.audit-result.show { display: block; }
+.audit-result.low  { border-color: #E05252; background: #fff5f5; }
+.audit-result.mid  { border-color: var(--honey-gold); background: #fffbee; }
+.audit-result.high { border-color: var(--action-green); background: #f0fbf3; }
+.audit-result strong { font-family: 'Poppins', sans-serif; font-weight: 600; display: block; margin-bottom: 4px; color: var(--pure-black); }
+.audit-result span { color: var(--pure-black); }
+
+/* CTA SECTION — pure black */
+.cta-section { background: var(--pure-black); padding: 72px 64px; position: relative; overflow: hidden; }
+.cta-bg1 { position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; background: var(--honey-gold); opacity: 0.06; }
+.cta-bg2 { position: absolute; bottom: -50px; left: 30%; width: 200px; height: 200px; border-radius: 50%; background: var(--forest-hive); opacity: 0.1; }
+.cta-wrap { position: relative; z-index: 1; max-width: 600px; }
+.cta-eyebrow { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--honey-gold); margin-bottom: 16px; }
+.cta-section h2 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.2; color: white; margin-bottom: 16px; }
+.cta-section h2 em { font-style: normal; color: var(--honey-gold); }
+.cta-section p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 32px; max-width: 480px; }
+.cta-buttons { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+/* Primary CTA: Forest Hive -> Action Green */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--forest-hive); color: white;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px;
+  text-decoration: none; padding: 14px 28px; border-radius: 10px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--action-green); transform: translateY(-2px); }
+
+/* Secondary CTA: Pure Black -> Midnight Drone */
+.btn-secondary-link {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 13px;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-secondary-link:hover { color: white; border-color: white; }
+
+.cta-note { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,0.3); }
+.cta-features { display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
+.cta-feature { display: flex; align-items: center; gap: 8px; }
+.cta-feature-dot { width: 8px; height: 8px; background: var(--action-green); border-radius: 50%; flex-shrink: 0; }
+.cta-feature-text { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+/* FOOTER — pure black */
+.footer {
+  background: var(--pure-black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 18px 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+@media (max-width: 640px) {
+  .cover, .intro, .mistake-header, .mistake-body-inner, .audit-section, .cta-section, .footer { padding-left: 24px; padding-right: 24px; }
+  .cover h1 { font-size: 28px; }
+  .nav-pills { display: none; }
+  .mistake-title { font-size: 18px; }
+  .mistake-grid, .intro-cards { grid-template-columns: 1fr; }
+  .expand-icon { right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#cover" class="nav-logo">
+    <span class="d">desig</span><span style="color:var(--propolis-brown)">&#x144;</span><span class="b">bees</span><span class="dot">.</span>
+  </a>
+  <div class="nav-pills">
+    <a href="#intro" class="nav-pill">Intro</a>
+    <a href="#m1" class="nav-pill">Canva Trap</a>
+    <a href="#m2" class="nav-pill">LinkedIn</a>
+    <a href="#m3" class="nav-pill">Sales Assets</a>
+    <a href="#m4" class="nav-pill">Website</a>
+    <a href="#m5" class="nav-pill">Internal</a>
+    <a href="#audit" class="nav-pill">Self-Audit</a>
+  </div>
+  <a href="https://designbees.com.au" class="nav-cta" target="_blank">Book a Demo</a>
+</nav>
+
+<div class="reading-progress" id="readingProgress"></div>
+
+<div class="wrap">
+
+  <!-- COVER -->
+  <section class="cover" id="cover">
+    <div class="cover-bg1"></div>
+    <div class="cover-bg2"></div>
+    <svg class="cover-hex" width="200" height="220" viewBox="0 0 200 220">
+      <polygon points="100,10 190,57 190,153 100,200 10,153 10,57" fill="none" stroke="white" stroke-width="1.5"/>
+      <polygon points="100,35 170,73 170,148 100,186 30,148 30,73" fill="none" stroke="white" stroke-width="1"/>
+    </svg>
+    <div class="cover-inner">
+      <div class="cover-tag"><div class="cover-tag-dot"></div>Free Guide &mdash; Australian Professional Services</div>
+      <h1>Top <em>5 Design Mistakes</em><br>Costing Your Firm Clients</h1>
+      <p class="cover-sub">A Marketing Manager's guide to building an unshakeable brand image &mdash; and the design errors silently undermining your credibility right now.</p>
+      <div class="cover-meta">
+        <div class="cover-byline">Brought to you by <strong>DesignBees</strong> &mdash; Australian Unlimited Graphic Design</div>
+        <div class="cover-stats">
+          <div class="cover-stat"><div class="cover-stat-num">5</div><div class="cover-stat-label">Mistakes</div></div>
+          <div class="cover-stat"><div class="cover-stat-num">10</div><div class="cover-stat-label">Min read</div></div>
+          <div class="cover-stat"><div class="cover-stat-num">1</div><div class="cover-stat-label">Free trial</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="section-eyebrow">Why this matters</div>
+    <h2>In professional services, perception is reality.</h2>
+    <p>Your firm's brand image is often the first &mdash; and sometimes only &mdash; thing a prospect sees before deciding whether to trust you with their business. In a market where services are intangible, design is the tangible proof of quality.</p>
+    <p>Yet most marketing teams in Australian professional services and IT firms are unknowingly making the same five design mistakes. They are not obvious. They do not feel like emergencies. But they are quietly eroding your credibility, undermining your sales team, and putting a ceiling on your growth.</p>
+    <p>This guide names them, explains their real cost, and shows you exactly how to fix each one.</p>
+    <div class="intro-cards">
+      <div class="intro-card">
+        <div class="intro-card-icon">&#128269;</div>
+        <div class="intro-card-title">Diagnose</div>
+        <div class="intro-card-text">Identify which mistakes your firm is currently making</div>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">&#128200;</div>
+        <div class="intro-card-title">Understand the Cost</div>
+        <div class="intro-card-text">See the real business impact each mistake creates</div>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">&#9889;</div>
+        <div class="intro-card-title">Fix It Fast</div>
+        <div class="intro-card-text">Get a clear path to resolving each issue immediately</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISTAKES -->
+  <div id="mistakes-container">
+
+    <div class="mistake-section" id="m1">
+      <div class="mistake-header" onclick="toggleMistake(this)">
+        <div class="mistake-number-row"><div class="mistake-badge">Mistake #1</div></div>
+        <div class="expand-icon"><svg viewBox="0 0 14 8" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="mistake-title">The <em>'Canva Trap'</em> for Premium Content</h2>
+        <p class="mistake-teaser">Using DIY tools for high-stakes documents is costing you credibility with every proposal you send. Click to read more.</p>
+      </div>
+      <div class="mistake-body">
+        <div class="mistake-body-inner">
+          <div class="mistake-grid">
+            <div class="mistake-card problem">
+              <div class="mistake-card-label">&#9888; The Problem</div>
+              <p>Using Canva for high-stakes documents &mdash; proposals, annual reports, pitch decks &mdash; signals that your firm is not investing in its own presentation. While Canva is excellent for social media, it was never built for professional-grade deliverables at the level sophisticated clients expect.</p>
+            </div>
+            <div class="mistake-card impact">
+              <div class="mistake-card-label">&#128200; The Business Impact</div>
+              <p>Proposals look templated and generic. Sophisticated clients notice. You may win the brief on paper but lose the room because your materials do not match the premium price tag you are charging.</p>
+            </div>
+          </div>
+          <div class="mistake-fix">
+            <div class="mistake-fix-label">&#9989; How to fix it</div>
+            <p>Reserve Canva for quick social assets. Route all proposals, decks, and reports through a professional design workflow with proper brand templates, typography hierarchy, and production-quality output. The investment pays for itself on the first deal it helps close.</p>
+          </div>
+          <a href="https://designbees.com.au" class="secondary-cta" target="_blank">See how DesignBees solves this <svg viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H5M11 2v6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistake-section" id="m2">
+      <div class="mistake-header" onclick="toggleMistake(this)">
+        <div class="mistake-number-row"><div class="mistake-badge">Mistake #2</div></div>
+        <div class="expand-icon"><svg viewBox="0 0 14 8" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="mistake-title">Inconsistent <em>Brand Voice</em> on LinkedIn</h2>
+        <p class="mistake-teaser">Your company page looks professional. Your people's profiles are a fragmented mess diluting your authority every day.</p>
+      </div>
+      <div class="mistake-body">
+        <div class="mistake-body-inner">
+          <div class="mistake-grid">
+            <div class="mistake-card problem">
+              <div class="mistake-card-label">&#9888; The Problem</div>
+              <p>Individual partners and employees post content with varied, off-brand visuals. Different banner images, inconsistent headshot styles, and mismatched post graphics across personal profiles present a fragmented picture to anyone researching your firm.</p>
+            </div>
+            <div class="mistake-card impact">
+              <div class="mistake-card-label">&#128200; The Business Impact</div>
+              <p>LinkedIn is where B2B trust is built. If your firm's people look visually disconnected, it raises doubts about whether you operate as a cohesive unit. Prospects build trust through personal profiles &mdash; and that is where your brand is breaking down.</p>
+            </div>
+          </div>
+          <div class="mistake-fix">
+            <div class="mistake-fix-label">&#9989; How to fix it</div>
+            <p>Create a LinkedIn brand kit: standardised banner templates, headshot editing guidelines, and post graphic templates for your team. Make it easy for every person to represent the firm consistently without needing a design degree to do it.</p>
+          </div>
+          <a href="https://designbees.com.au" class="secondary-cta" target="_blank">See how DesignBees solves this <svg viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H5M11 2v6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistake-section" id="m3">
+      <div class="mistake-header" onclick="toggleMistake(this)">
+        <div class="mistake-number-row"><div class="mistake-badge">Mistake #3</div></div>
+        <div class="expand-icon"><svg viewBox="0 0 14 8" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="mistake-title">Lack of <em>Sales Enablement</em> Polish</h2>
+        <p class="mistake-teaser">Your sales team is walking into final pitches with outdated decks and generic one-pagers. You are losing deals at the last hurdle.</p>
+      </div>
+      <div class="mistake-body">
+        <div class="mistake-body-inner">
+          <div class="mistake-grid">
+            <div class="mistake-card problem">
+              <div class="mistake-card-label">&#9888; The Problem</div>
+              <p>Sales teams are using outdated or poorly designed PowerPoint decks, case study PDFs, and one-pagers. These bottom-of-funnel assets are where deals are won or lost &mdash; yet they receive the least design attention, left to whoever has time between meetings.</p>
+            </div>
+            <div class="mistake-card impact">
+              <div class="mistake-card-label">&#128200; The Business Impact</div>
+              <p>A strong service offering presented in a weak deck makes the whole firm look less capable. At the final pitch stage, your competitor with the polished presentation has a measurable advantage. You have done all the work to get in the room and then let design undermine you.</p>
+            </div>
+          </div>
+          <div class="mistake-fix">
+            <div class="mistake-fix-label">&#9989; How to fix it</div>
+            <p>Treat your sales collateral as a living asset that gets refreshed quarterly. Every pitch deck, case study, and capability statement should be production-quality and on-brand. Build a system where updating them is frictionless &mdash; not a 3-day project every time a pitch comes in.</p>
+          </div>
+          <a href="https://designbees.com.au" class="secondary-cta" target="_blank">See how DesignBees solves this <svg viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H5M11 2v6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistake-section" id="m4">
+      <div class="mistake-header" onclick="toggleMistake(this)">
+        <div class="mistake-number-row"><div class="mistake-badge">Mistake #4</div></div>
+        <div class="expand-icon"><svg viewBox="0 0 14 8" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="mistake-title">Generic Website &amp; <em>Landing Page</em> Visuals</h2>
+        <p class="mistake-teaser">Your website looks identical to every competitor. You have 8 seconds to differentiate &mdash; and you are wasting them.</p>
+      </div>
+      <div class="mistake-body">
+        <div class="mistake-body-inner">
+          <div class="mistake-grid">
+            <div class="mistake-card problem">
+              <div class="mistake-card-label">&#9888; The Problem</div>
+              <p>Relying on generic, overused stock photography that does not reflect your firm's unique value or the Australian market. The "handshake in a glass office" image says nothing about you specifically. When your website looks like every competitor, prospects have no visual reason to remember you.</p>
+            </div>
+            <div class="mistake-card impact">
+              <div class="mistake-card-label">&#128200; The Business Impact</div>
+              <p>High bounce rates, low engagement, and prospects who cannot articulate what makes you different when comparing providers. You are failing to build the emotional connection that makes firms memorable &mdash; and memorable firms win more inbound referrals.</p>
+            </div>
+          </div>
+          <div class="mistake-fix">
+            <div class="mistake-fix-label">&#9989; How to fix it</div>
+            <p>Commission custom illustrations, iconography, or photography that reflects your specific expertise and Australian context. Even a refreshed visual language &mdash; custom icons, a distinct colour application, branded graphic elements &mdash; dramatically separates you from the pack without a full rebrand.</p>
+          </div>
+          <a href="https://designbees.com.au" class="secondary-cta" target="_blank">See how DesignBees solves this <svg viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H5M11 2v6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistake-section" id="m5">
+      <div class="mistake-header" onclick="toggleMistake(this)">
+        <div class="mistake-number-row"><div class="mistake-badge">Mistake #5</div></div>
+        <div class="expand-icon"><svg viewBox="0 0 14 8" fill="none"><path d="M1 1l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="mistake-title">Neglecting <em>Internal Branding</em></h2>
+        <p class="mistake-teaser">Plain internal documents are a missed opportunity to reinforce culture &mdash; and a signal to your team about how much you value quality.</p>
+      </div>
+      <div class="mistake-body">
+        <div class="mistake-body-inner">
+          <div class="mistake-grid">
+            <div class="mistake-card problem">
+              <div class="mistake-card-label">&#9888; The Problem</div>
+              <p>Training materials, onboarding guides, company announcements and internal reports are plain, unengaging, and look nothing like the polished external brand. This creates a two-tier experience: the brand you sell externally, and the reality employees experience internally.</p>
+            </div>
+            <div class="mistake-card impact">
+              <div class="mistake-card-label">&#128200; The Business Impact</div>
+              <p>Poor internal design leads to lower engagement with critical materials, weaker culture reinforcement, and higher friction in onboarding. Employees who do not feel proud of how their firm presents itself internally are less likely to advocate for the brand externally.</p>
+            </div>
+          </div>
+          <div class="mistake-fix">
+            <div class="mistake-fix-label">&#9989; How to fix it</div>
+            <p>Apply your brand standards to internal communications with the same rigour as external ones. Branded onboarding decks, formatted training guides, and designed internal newsletters signal to your team that quality matters at every level &mdash; building the culture you want to project externally.</p>
+          </div>
+          <a href="https://designbees.com.au" class="secondary-cta" target="_blank">See how DesignBees solves this <svg viewBox="0 0 13 13" fill="none"><path d="M2 11L11 2M11 2H5M11 2v6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SELF-AUDIT -->
+  <section class="audit-section" id="audit">
+    <div class="section-eyebrow">Quick Self-Audit</div>
+    <h2>Is your firm making these mistakes right now?</h2>
+    <p class="sub">Tick the ones that apply. Be honest &mdash; this is for you.</p>
+    <div class="audit-grid">
+      <div class="audit-item" onclick="auditToggle(this)">
+        <div class="audit-check"><svg viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="audit-text">We use Canva for client proposals, pitch decks, or formal reports.</span>
+        <span class="audit-tag audit-tag-1">Mistake #1</span>
+      </div>
+      <div class="audit-item" onclick="auditToggle(this)">
+        <div class="audit-check"><svg viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="audit-text">Our team's LinkedIn profiles look visually inconsistent with each other and our brand.</span>
+        <span class="audit-tag audit-tag-2">Mistake #2</span>
+      </div>
+      <div class="audit-item" onclick="auditToggle(this)">
+        <div class="audit-check"><svg viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="audit-text">Our pitch decks or sales one-pagers have not had a professional design refresh in over 6 months.</span>
+        <span class="audit-tag audit-tag-3">Mistake #3</span>
+      </div>
+      <div class="audit-item" onclick="auditToggle(this)">
+        <div class="audit-check"><svg viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="audit-text">Our website uses generic stock photos that could belong to any firm in our industry.</span>
+        <span class="audit-tag audit-tag-4">Mistake #4</span>
+      </div>
+      <div class="audit-item" onclick="auditToggle(this)">
+        <div class="audit-check"><svg viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <span class="audit-text">Our internal documents, onboarding materials, or reports are unbranded or plain Word docs.</span>
+        <span class="audit-tag audit-tag-5">Mistake #5</span>
+      </div>
+    </div>
+    <div class="audit-result" id="auditResult">
+      <strong id="auditResultTitle"></strong>
+      <span id="auditResultBody"></span>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="cta">
+    <div class="cta-bg1"></div>
+    <div class="cta-bg2"></div>
+    <div class="cta-wrap">
+      <div class="cta-eyebrow">Your next step</div>
+      <h2>Ready to build a brand that<br><em>commands authority?</em></h2>
+      <p>All five mistakes share a common root: a lack of access to efficient, professional design resources. DesignBees gives Australian professional services firms a dedicated design engine &mdash; unlimited requests, fast turnarounds, flat monthly fee.</p>
+      <div class="cta-buttons">
+        <a href="https://designbees.com.au" class="btn-primary" target="_blank">
+          Book a Demo
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://designbees.com.au" class="btn-secondary-link" target="_blank">Start your 10-day free trial</a>
+      </div>
+      <div class="cta-note">No contracts. No lock-in. Cancel anytime.</div>
+      <div class="cta-features">
+        <div class="cta-feature"><div class="cta-feature-dot"></div><div class="cta-feature-text">Unlimited design requests</div></div>
+        <div class="cta-feature"><div class="cta-feature-dot"></div><div class="cta-feature-text">Dedicated Australian designer</div></div>
+        <div class="cta-feature"><div class="cta-feature-dot"></div><div class="cta-feature-text">Flat monthly fee</div></div>
+        <div class="cta-feature"><div class="cta-feature-dot"></div><div class="cta-feature-text">48hr average turnaround</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-logo">
+      <span style="color:var(--propolis-brown)">desig</span><span style="color:var(--propolis-brown)">&#x144;</span><span style="color:var(--honey-gold)">bees</span><span style="color:var(--honey-gold)">.</span>
+    </div>
+    <div class="footer-copy">&copy; 2026 DesignBees. All rights reserved.</div>
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener('scroll', function() {
+    var prog = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('readingProgress').style.width = prog + '%';
+    var ids = ['intro','m1','m2','m3','m4','m5','audit'];
+    var pills = document.querySelectorAll('.nav-pill');
+    ids.forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (!el || !pills[i]) return;
+      var r = el.getBoundingClientRect();
+      if (r.top <= 80 && r.bottom >= 80) {
+        pills.forEach(function(p) { p.classList.remove('active'); });
+        pills[i].classList.add('active');
+      }
+    });
+  });
+
+  function toggleMistake(headerEl) {
+    var section = headerEl.parentElement;
+    var isOpen = section.classList.contains('open');
+    document.querySelectorAll('.mistake-section.open').forEach(function(s) { s.classList.remove('open'); });
+    if (!isOpen) section.classList.add('open');
+  }
+
+  document.querySelector('.mistake-section').classList.add('open');
+
+  function auditToggle(el) {
+    el.classList.toggle('yes');
+    updateAudit();
+  }
+
+  function updateAudit() {
+    var checked = document.querySelectorAll('.audit-item.yes').length;
+    var result = document.getElementById('auditResult');
+    var title  = document.getElementById('auditResultTitle');
+    var body   = document.getElementById('auditResultBody');
+    if (checked === 0) { result.className = 'audit-result'; return; }
+    result.className = 'audit-result show';
+    if (checked >= 4) {
+      result.classList.add('low');
+      title.textContent = checked + ' out of 5 mistakes identified — your brand is under significant pressure.';
+      body.textContent  = 'These are not minor issues. Each one is actively costing you credibility, sales opportunities, or team efficiency. The good news: they are all fixable, and quickly, with the right design resource behind you.';
+    } else if (checked >= 2) {
+      result.classList.add('mid');
+      title.textContent = checked + ' out of 5 mistakes identified — there are clear gaps to close.';
+      body.textContent  = 'You have solid foundations in some areas, but the mistakes you identified are creating real friction in your sales and marketing. Fixing even one of these can meaningfully improve how prospects perceive your firm.';
+    } else {
+      result.classList.add('high');
+      title.textContent = checked + ' out of 5 mistakes identified — you are ahead of most firms.';
+      body.textContent  = 'The area you flagged is worth addressing to ensure your brand consistently represents the quality of your services across every touchpoint.';
+    }
+  }
+</script>
+</body>
+</html>
